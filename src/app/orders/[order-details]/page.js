@@ -92,7 +92,7 @@ export default function OrderDetails() {
                       </div>
                       <div className="w-full flex justify-between items-start space-x-8">
                         <h3 className="text-xl font-semibold leading-6 text-gray-900">
-                          ${item && item.product && item.product.price}
+                          {item && item.product && item.product.price} VNĐ
                         </h3>
                       </div>
                     </div>

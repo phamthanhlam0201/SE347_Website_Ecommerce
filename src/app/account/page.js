@@ -131,7 +131,7 @@ export default function Account() {
               {/* we have render random user image here */}
             </div>
             <div className="flex flex-col flex-1">
-              <h4 className="text-lg font-semibold text-center md:text-left">
+              <h4 className="text-lg font-semibold mt-5 md:text-left">
                 {user?.name}
               </h4>
               <p>{user?.email}</p>

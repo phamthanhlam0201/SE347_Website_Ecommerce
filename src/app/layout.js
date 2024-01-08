@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ margin: 0, height: '100%', background:'url("images/background.webp")',backgroundSize: '100% 100%', backgroundPositionY:"repeat"}}>
+      <body className={inter.className}> 
         <GlobalState>
           <Navbar/>
           <main className='flex min-h-screen flex-col mt-[80px]'>{children}</main>

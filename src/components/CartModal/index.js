@@ -106,10 +106,11 @@ export default function CartModal() {
                       </h3>
                     </div>
                     <p className="mt-1 text-sm text-gray-600">
-                      $
+                      
                       {cartItem &&
                         cartItem.productID &&
                         cartItem.productID.price}
+                      VNĐ
                     </p>
                   </div>
                   <div className="flex flex-1 items-end justify-between text-sm">
@@ -163,7 +164,7 @@ export default function CartModal() {
             Checkout
           </button>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
-            <button type="button" className="font-medium text-grey" onClick={() => {router.push("/"); setShowCartModal(false);}}>
+            <button type="button" className="font-medium text-grey" onClick={() => {router.push("/product/listing/all-products"); setShowCartModal(false);}}>
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>
             </button>

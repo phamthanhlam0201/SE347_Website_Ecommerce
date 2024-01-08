@@ -19,6 +19,11 @@ export const navOptions = [
     label: "Shirts",
     path: "/product/listing/shirts",
   },
+  {
+    id: "listingSales",
+    label: "Sale",
+    path: "/product/listing/sales",
+  }
 ];
 
 export const adminNavOptions = [
@@ -69,7 +74,7 @@ export const registrationFormControls = [
       },
       {
         id: "customer",
-        label: "customer",
+        label: "Customer",
       },
     ],
   },
@@ -128,7 +133,7 @@ export const adminAddProductformControls = [
       {
         id: "shirts",
         label: "Shirts",
-      },
+      }
     ],
   },
   {

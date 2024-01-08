@@ -24,18 +24,18 @@ export default function ProductTile({ item }) {
       <div className="my-4 mx-auto flex w-10/12 flex-col items-start justify-between">
         <div className="mb-2 flex">
           <p
-            className={`mr-3 text-sm font-semibold ${
+            className={`mr-1 text-sm font-semibold ${
               item.onSale === "yes" ? "line-through" : ""
             }`}
-          >{`$ ${item.price}`}</p>
+          >{`${item.price} VNĐ`}</p>
           {item.onSale === "yes" ? (
-            <p className="mr-3 text-sm font-semibold text-red-700">{`$ ${(
+            <p className="mr-1 text-sm font-semibold text-red-500">{`${(
               item.price -
               item.price * (item.priceDrop / 100)
-            ).toFixed(2)}`}</p>
+            ).toFixed(0)} VNĐ`}</p>
           ) : null}
           {item.onSale === "yes" ? (
-            <p className="mr-3 text-sm font-semibold">{`-(${item.priceDrop}%)off`}</p>
+            <p className="mr-1 text-sm font-semibold">{`-(${item.priceDrop}%)`}</p>
           ) : null}
         </div>
         <h3 className="md-2 text-gray-400 text-sm">{item.name}</h3>

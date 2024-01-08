@@ -92,8 +92,13 @@ export default function Navbar() {
             onClick={() => router.push("/")}
             className="flex items-center cursor-pointer"
           >
-            <span className="slef-center text-2xl font-semibold whitespace-nowrap">
-              2W0 MEMBERS
+            <img
+              src="images/logo.png" // Thay đổi đường dẫn hình ảnh của logo
+              alt="Logo"
+              className="w-10 h-10" // Điều chỉnh kích thước của logo
+            />
+            <span className="slef-center sm:text-2xl text-xl font-semibold whitespace-nowrap">
+              MEMBERS
             </span>
           </div>
           <div className="flex md:order-2 gap-2">

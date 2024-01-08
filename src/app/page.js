@@ -26,67 +26,34 @@ export default function Home() {
   console.log(products);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-10">
       <section className="">
-        <div className="grid max-w-screen-xl px-4 py-8 mx-suto  lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-          <div className="mr-auto place-self-center lg:col-span-7">
-            <h2 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl">
+      <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+        <div className="relative overflow-hidden">
+          <img
+            src="images/image.png"
+            alt="Explore Shop Collection"
+            className="w-full h-auto"
+          />
+          <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-dark px-6 lg:px-8 sm:px-4">
+            <h2 className="max-w-2xl mb-2 text-xl md:text-4xl xl:text-5xl font-extrabold tracking-tight leading-none">
               Spring Sale Collection
             </h2>
-            <p className="max-w-2xl mb-6 font-semibold text-lime-500 lg:mb-8 md:text-lg lg:text-xl">
-              Chào đón Xuân Giáp Thìn 2024 !
+            <p className="max-w-2xl mb-2 font-semibold text-lime-500 md:mb-5 text-xs md:text-lg lg:text-xl">
+              Welcome to our store
             </p>
-
             <button
               type="button"
-              onClick={() => router.push("/product/listing/all-products")}
-              className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+              onClick={() => router.push("/product/listing/sales")}
+              className="inline-block bg-black px-3 py-2 text-xs sm:px-5 sm:py-3 sm:text-sm md:font-medium uppercase tracking-wide text-white "
             >
               Go to STORE
             </button>
-            <div className="lg:col-span-2 lg:py-8">
-              <ul className="grid grid-cols-2 gap-4">
-                {products && products.length
-                  ? products
-                      .filter((item) => item.onSale === "yes")
-                      .splice(0, 2)
-                      .map((productItem) => (
-                        <li
-                          onClick={() =>
-                            router.push(`/product/${productItem._id}`)
-                          }
-                          className="cursor-pointer"
-                          key={productItem._id}
-                        >
-                          <div>
-                            <img
-                              src={productItem.imageUrl}
-                              alt="Sale Product Item"
-                              className="object-cover w-full rounded aspect-square"
-                            />
-                          </div>
-                          <div className="mt-3">
-                            <h3 className="font-medium text-gray-900">
-                              {productItem.name}
-                            </h3>
-                            <p className="mt-1 text-sm text-gray-800">
-                              ${productItem.price}{" "}
-                              <span className="text-red-700">{`(-${productItem.priceDrop}%) Off`}</span>
-                            </p>
-                          </div>
-                        </li>
-                      ))
-                  : null}
-              </ul>
-            </div>
-          </div>
-          <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-              alt="Explore Shop Collection"
-            />
           </div>
         </div>
+      </div>
+
+
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <div className="text-center">
             <h2 className="text-xl font-bold text-gray-950 sm:text-3xl">
@@ -97,7 +64,6 @@ export default function Home() {
             <li>
               <div className="relative block group">
                 <img
-                  // src="https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                   src="https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRzaGlydHN8ZW58MHx8MHx8fDA%3D"
                   className="object-cover w-full aspect-square"
                 />
@@ -147,6 +113,36 @@ export default function Home() {
               </div>
             </li>
           </ul>
+        </div>
+        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 bg-gray-400">
+        <div className="grid grid-cols-12 gap-4">
+          {/* Thông tin liên hệ */}
+          <div className="col-span-12 lg:col-span-5">
+            <div>
+              <h3 className="text-xl font-bold text-gray-950 sm:text-xl">CONTACT INFO</h3>
+              <p>Phone: 038 651 0050</p>
+              <p>Email: phamthanhlam@gmail.com</p>
+            </div>
+          </div>
+
+          {/* Chính sách hỗ trợ */}
+          <div className="col-span-12 lg:col-span-4">
+            <div>
+              <h3 className="text-xl font-bold text-gray-950 sm:text-xl">SUPPORTING POLICIES</h3>
+              <p>Introduce</p>
+              <p>Return policy</p>
+            </div>
+          </div>
+
+          {/* Thông tin liên kết */}
+          <div className="col-span-12 lg:col-span-3">
+            <div>
+              <h3 className="text-xl font-bold text-gray-950 sm:text-xl">LINK INFORMATION</h3>
+              <p>Please connect with us</p>
+            </div>
+          </div>
+        </div>
+
         </div>
       </section>
     </main>
