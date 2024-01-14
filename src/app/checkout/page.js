@@ -27,9 +27,9 @@ export default function Checkout() {
 
   const router = useRouter();
   const params = useSearchParams();
-
+  
   const publishableKey =
-    "pk_test_51NMv6ZSC6E6fnyMeRIEb9oEXdGRCC9yrBTT4xWHgcjWOuFcqFiAHErvaS50K1hl5t5WJXVGfLLWxvb705IWJhA3300yCcrMnlM";
+    "pk_test_51OXEogLy0biuIw7aAFn9ba0Foe7CMv3e5ojcnlpFQn6CufHJGKa3Et2roRPHdFzVMB5V0ik9B4XD9eD9joBBiPBg00cGXbG2nP";
   const stripePromise = loadStripe(publishableKey);
 
   console.log(cartItems);
@@ -65,12 +65,14 @@ export default function Checkout() {
           user: user?._id,
           shippingAddress: getCheckoutFormData.shippingAddress,
           orderItems: cartItems.map((item) => ({
-            qty: 1,
+            size: item.size,
+            qtys: item.quantity,
+            color: item.color,
             product: item.productID,
           })),
           paymentMethod: "Stripe",
           totalPrice: cartItems.reduce(
-            (total, item) => item.productID.price + total,
+            (total, item) => item.productID.price*item.quantity + total,
             0
           ),
           isPaid: true,
@@ -129,17 +131,18 @@ export default function Checkout() {
 
     const createLineItems = cartItems.map((item) => ({
       price_data: {
-        currency: "usd",
+        currency: "vnd",
         product_data: {
           images: [item.productID.imageUrl],
           name: item.productID.name,
         },
-        unit_amount: item.productID.price * 100,
+        unit_amount: item.productID.price,
       },
-      quantity: 1,
+      quantity: item.quantity,
     }));
 
     const res = await callStripeSession(createLineItems);
+    console.log("Stripe Session Response:", res)
     setIsOrderProcessing(true);
     localStorage.setItem("stripe", true);
     localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));
@@ -209,14 +212,23 @@ export default function Checkout() {
                   <img
                     src={item && item.productID && item.productID.imageUrl}
                     alt="Cart Item"
-                    className="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                    className="m-2 h-28 w-28 rounded-md border object-cover object-center"
                   />
-                  <div className="flex w-full flex-col px-4 py-4">
+                  <div className="flex w-full flex-col px-4 py-1">
                     <span className="font-bold">
-                      {item && item.productID && item.productID.name}
+                      Name: {item && item.productID && item.productID.name}
                     </span>
                     <span className="font-semibold">
-                      {item && item.productID && item.productID.price}
+                      Price: {item && item.productID && item.productID.price}
+                    </span>
+                    <span className="font-semibold">
+                      Size: {item && item.productID && item.size}
+                    </span>
+                    <span className="font-semibold">
+                      Quantity: {item && item.productID && item.quantity}
+                    </span>
+                    <span className="font-semibold">
+                      Color: {item && item.productID && item.color}
                     </span>
                   </div>
                 </div>
@@ -245,8 +257,8 @@ export default function Checkout() {
                   <p>Address : {item.address}</p>
                   <p>City : {item.city}</p>
                   <p>Country : {item.country}</p>
-                  <p>PostalCode : {item.postalCode}</p>
-                  <button className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                  <p>Phone : {item.postalCode}</p>
+                  <button className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide rounded-md">
                     {item._id === selectedAddress
                       ? "Selected Address"
                       : "Select Address"}
@@ -259,7 +271,7 @@ export default function Checkout() {
           </div>
           <button
             onClick={() => router.push("/account")}
-            className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+            className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide rounded-md"
           >
             Add new address
           </button>
@@ -267,13 +279,12 @@ export default function Checkout() {
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Subtotal</p>
               <p className="text-lg font-bold text-gray-900">
-                $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) => item.productID.price + total,
+                      (total, item) => item.productID.price*item.quantity+ total,
                       0
                     )
-                  : "0"}
+                  : "0"} VNĐ
               </p>
             </div>
             <div className="flex items-center justify-between">
@@ -283,13 +294,12 @@ export default function Checkout() {
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
               <p className="text-lg font-bold text-gray-900">
-                $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) => item.productID.price + total,
+                      (total, item) => item.productID.price*item.quantity+ total,
                       0
                     )
-                  : "0"}
+                  : "0"} VNĐ
               </p>
             </div>
             <div className="pb-10">
@@ -299,7 +309,7 @@ export default function Checkout() {
                   Object.keys(checkoutFormData.shippingAddress).length === 0
                 }
                 onClick={handleCheckout}
-                className="disabled:opacity-50 mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                className="disabled:opacity-50 mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide rounded-md"
               >
                 Checkout
               </button>

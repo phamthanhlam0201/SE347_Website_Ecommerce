@@ -10,10 +10,20 @@ const CartSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Products',
     },
+    size: {
+      type: String,
+      required: true,
+      default: '',
+    },
     quantity: {
         type: Number,
         required: true,
         default: 1,
+    },
+    color: {
+      type: String,
+      required: true,
+      default: '',
     },
   },
   { timestamps: true }

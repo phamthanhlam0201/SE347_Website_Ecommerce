@@ -114,10 +114,10 @@ export const adminAddProductformControls = [
   },
   {
     id: "description",
-    type: "text",
+    type: "textarea",
     placeholder: "Enter description",
     label: "Description",
-    componentType: "input",
+    componentType: "textarea",
   },
   {
     id: "category",
@@ -138,9 +138,9 @@ export const adminAddProductformControls = [
   },
   {
     id: "deliveryInfo",
-    type: "text",
+    type: "number",
     placeholder: "Enter deliveryInfo",
-    label: "Delivery Info",
+    label: "Quantity available",
     componentType: "input",
   },
   {
@@ -171,10 +171,6 @@ export const adminAddProductformControls = [
 
 export const AvailableSizes = [
   {
-    id: "s",
-    label: "S",
-  },
-  {
     id: "m",
     label: "M",
   },
@@ -182,20 +178,43 @@ export const AvailableSizes = [
     id: "l",
     label: "L",
   },
+  {
+    id: "xl",
+    label: "XL",
+  },
+];
+
+export const AvailableColors = [
+  {
+    id: "black",
+    label: "Black",
+  },
+  {
+    id: "white",
+    label: "White",
+  },
+  {
+    id: "gray",
+    label: "Gray",
+  },
+  {
+    id: "blue",
+    label: "Blue",
+  },
 ];
 
 export const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "AUTH_DOMAIN",
-  projectId: "PROJECT_ID",
-  storageBucket: "STROAGE_BUCKET",
-  messagingSenderId: "MESSAGING_SENDER_ID",
-  appId: "APP_ID",
-  measurementId: "MEASUREMENT_ID",
+  apiKey: "AIzaSyCdU8Z9dCqXr1CBQjYBmI4U-f5v0HPZXik",
+  authDomain: "se347-ecommerce.firebaseapp.com",
+  projectId: "se347-ecommerce",
+  storageBucket: "se347-ecommerce.appspot.com",
+  messagingSenderId: "766658911862",
+  appId: "1:766658911862:web:3a7e6515c66da7b7150957",
+  measurementId: "G-WDXZYPM6QR"
 };
 
 export const firebaseStroageURL =
-  "gs://ecommerce-f2cdd.appspot.com";
+  "gs://se347-ecommerce.appspot.com";
 
 export const addNewAddressFormControls = [
   {
@@ -229,8 +248,8 @@ export const addNewAddressFormControls = [
   {
     id: "postalCode",
     type: "input",
-    placeholder: "Enter your postal code",
-    label: "Postal Code",
+    placeholder: "Enter your phone number",
+    label: "Phone",
     componentType: "input",
   },
 ];

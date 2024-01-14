@@ -23,7 +23,7 @@ export default function CommonCart({
                     {cartItems.map((cartItem) => (
                       <li
                         className="flex-col flex space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0"
-                        key={cartItem.id}
+                        key={cartItem._id}
                       >
                         <div className="shrink-0">
                           <img
@@ -40,21 +40,37 @@ export default function CommonCart({
                           <div className="sm:col-gap-5 sm:grid sm:grid-cols-2">
                             <div className="pr-8 sm:pr-4">
                               <p className="text-base font-semibold text-gray-900">
-                                {cartItem &&
+                                Name: {cartItem &&
                                   cartItem.productID &&
                                   cartItem.productID.name}
+                              </p>
+                              <p className="text-base font-semibold text-gray-900">
+                                Size: {cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.size &&
+                                  cartItem.size.toUpperCase()}
+                              </p>
+                              <p className="text-base font-semibold text-gray-900">
+                                Quantity: {cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.quantity}
+                              </p>
+                              <p className="text-base font-semibold text-gray-900">
+                                Color: {cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.color}
                               </p>
                             </div>
                             <div className="mt-4 flex gap-3 items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
                               <p className="shrink-0 w-25 text-base font-semibold text-gray-950 sm:order-1 sm:ml-8 sm:text-right">
                                 
-                                {cartItem &&
+                                Price: {cartItem &&
                                   cartItem.productID &&
                                   cartItem.productID.price} VNĐ
                               </p>
                               <button
                                 type="button"
-                                className="font-medium text-yellow-700 sm:order-2"
+                                className="font-medium text-yellow-700 sm:order-2 rounded-md"
                                 onClick={() =>
                                   handleDeleteCartItem(cartItem._id)
                                 }
@@ -91,7 +107,7 @@ export default function CommonCart({
                     
                     {cartItems && cartItems.length
                       ? cartItems.reduce(
-                          (total, item) => item.productID.price + total,
+                          (total, item) => item.productID.price*item.quantity + total,
                           0
                         )
                       : "0"} VNĐ
@@ -108,7 +124,7 @@ export default function CommonCart({
                     
                     {cartItems && cartItems.length
                       ? cartItems.reduce(
-                          (total, item) => item.productID.price + total,
+                          (total, item) => item.productID.price*item.quantity + total,
                           0
                         )
                       : "0"} VNĐ
@@ -119,7 +135,7 @@ export default function CommonCart({
                   <button
                   onClick={()=>router.push('/checkout')}
                     disabled={cartItems && cartItems.length === 0}
-                    className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
+                    className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide rounded-md"
                   >
                     Checkout
                   </button>

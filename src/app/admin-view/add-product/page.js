@@ -1,6 +1,7 @@
 "use client";
 
 import InputComponent from "@/components/FormElements/InputComponent";
+import TextAreaComponent from "@/components/FormElements/TextAreaComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import TileComponent from "@/components/FormElements/TileComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
@@ -9,6 +10,7 @@ import { GlobalContext } from "@/context";
 import { addNewProduct, updateAProduct } from "@/services/product";
 import {
   AvailableSizes,
+  AvailableColors,
   adminAddProductformControls,
   firebaseConfig,
   firebaseStroageURL,
@@ -63,6 +65,7 @@ const initialFormData = {
   description: "",
   category: "T-Shirts",
   sizes: [],
+  colors: [],
   deliveryInfo: "",
   onSale: "no",
   imageUrl: "",
@@ -100,22 +103,71 @@ export default function AdminAddNewProduct() {
     }
   }
 
-  function handleTileClick(getCurrentItem) {
-    let cpySizes = [...formData.sizes];
+  // function handleTileClickSizes(getCurrentItem) {
+  //   let cpySizes = [...formData.sizes];
+  //   const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
+
+  //   if (index === -1) {
+  //     cpySizes.push(getCurrentItem);
+  //   } else {
+  //     cpySizes = cpySizes.filter((item) => item.id !== getCurrentItem.id);
+
+  //   }
+
+  //   setFormData({
+  //     ...formData,
+  //     sizes: cpySizes,
+  //   });
+  // }
+
+  // function handleTileClickColors(getCurrentItem) {
+  //   let cpyColors = [...formData.colors];
+  //   const index = cpyColors.findIndex((item) => item.id === getCurrentItem.id);
+
+  //   if (index === -1) {
+  //     cpyColors.push(getCurrentItem);
+  //   } else {
+  //     cpyColors = cpyColors.filter((item) => item.id !== getCurrentItem.id);
+  //   }
+
+  //   setFormData({
+  //     ...formData,
+  //     colors: cpyColors,
+  //   });
+  // }
+  function handleTileClickSizes(getCurrentItem) {
+    const cpySizes = [...formData.sizes];
     const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
 
     if (index === -1) {
-      cpySizes.push(getCurrentItem);
+        setFormData({
+            ...formData,
+            sizes: [...cpySizes, getCurrentItem],
+        });
     } else {
-      cpySizes = cpySizes.filter((item) => item.id !== getCurrentItem.id);
+        setFormData({
+            ...formData,
+            sizes: cpySizes.filter((item) => item.id !== getCurrentItem.id),
+        });
     }
-
-    setFormData({
-      ...formData,
-      sizes: cpySizes,
-    });
   }
 
+  function handleTileClickColors(getCurrentItem) {
+      const cpyColors = [...formData.colors];
+      const index = cpyColors.findIndex((item) => item.id === getCurrentItem.id);
+
+      if (index === -1) {
+          setFormData({
+              ...formData,
+              colors: [...cpyColors, getCurrentItem],
+          });
+      } else {
+          setFormData({
+              ...formData,
+              colors: cpyColors.filter((item) => item.id !== getCurrentItem.id),
+          });
+      }
+  }
   async function handleAddProduct() {
     setComponentLevelLoader({ loading: true, id: "" });
     const res =
@@ -157,17 +209,41 @@ export default function AdminAddNewProduct() {
             type="file"
             onChange={handleImage}
           />
+          
+          <div className="flex gap-2 flex-col">
+            <label>Available colors</label>
+            <TileComponent
+              selected={formData.colors}
+              onClick={handleTileClickColors}
+              data={AvailableColors}
+
+            />
+          </div>
 
           <div className="flex gap-2 flex-col">
             <label>Available sizes</label>
             <TileComponent
               selected={formData.sizes}
-              onClick={handleTileClick}
+              onClick={handleTileClickSizes}
               data={AvailableSizes}
             />
           </div>
+
           {adminAddProductformControls.map((controlItem) =>
-            controlItem.componentType === "input" ? (
+            controlItem.componentType === "textarea" ? (
+              <TextAreaComponent
+                type={controlItem.type}
+                placeholder={controlItem.placeholder}
+                label={controlItem.label}
+                value={formData[controlItem.id]}
+                onChange={(event) => {
+                  setFormData({
+                    ...formData,
+                    [controlItem.id]: event.target.value,
+                  });
+                }}
+              />
+            ):controlItem.componentType === "input" ? (
               <InputComponent
                 type={controlItem.type}
                 placeholder={controlItem.placeholder}

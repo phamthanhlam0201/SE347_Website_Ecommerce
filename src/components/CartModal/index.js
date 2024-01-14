@@ -30,16 +30,16 @@ export default function CartModal() {
           ? res.data.map((item) => ({
               ...item,
               productID: {
-                ...item.productID,
+                ...(item.productID || {}),
                 price:
-                  item.productID.onSale === "yes"
+                item.productID && item.productID.onSale === "yes"
                     ? parseInt(
                         (
-                          item.productID.price -
-                          item.productID.price * (item.productID.priceDrop / 100)
+                          (item.productID.price || 0) -
+                          (item.productID.price || 0) * (item.productID.priceDrop / 100)
                         ).toFixed(2)
                       )
-                    : item.productID.price,
+                    : (item.productID && item.productID.price) || 0,
               },
             }))
           : [];
@@ -82,7 +82,7 @@ export default function CartModal() {
         cartItems && cartItems.length ? (
           <ul role="list" className="-my-6 divide-y divide-gray-300">
             {cartItems.map((cartItem) => (
-              <li key={cartItem.id} className="flex py-6">
+              <li key={cartItem._id} className="flex py-6">
                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                   <img
                     src={
@@ -109,8 +109,8 @@ export default function CartModal() {
                       
                       {cartItem &&
                         cartItem.productID &&
-                        cartItem.productID.price}
-                      VNĐ
+                        cartItem.productID.price} VNĐ
+                      
                     </p>
                   </div>
                   <div className="flex flex-1 items-end justify-between text-sm">
@@ -148,7 +148,7 @@ export default function CartModal() {
               router.push("/cart");
               setShowCartModal(false);
             }}
-            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide rounded-md"
           >
             Go To Cart
           </button>
@@ -159,12 +159,12 @@ export default function CartModal() {
               router.push("/checkout");
               setShowCartModal(false);
             }}
-            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
+            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50 rounded-md"
           >
             Checkout
           </button>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
-            <button type="button" className="font-medium text-grey" onClick={() => {router.push("/product/listing/all-products"); setShowCartModal(false);}}>
+            <button type="button" className="font-medium text-grey rounded-md" onClick={() => {router.push("/product/listing/all-products"); setShowCartModal(false);}}>
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>
             </button>

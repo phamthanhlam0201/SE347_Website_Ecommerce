@@ -37,7 +37,6 @@ export async function POST(req) {
       });
 
       console.log(isCurrentCartItemAlreadyExists);
-      
 
       if (isCurrentCartItemAlreadyExists?.length > 0) {
         return NextResponse.json({

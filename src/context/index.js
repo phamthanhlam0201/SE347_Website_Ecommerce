@@ -51,6 +51,9 @@ export default function GlobalState({ children }) {
   const [allOrdersForUser, setAllOrdersForUser] = useState([]);
   const [orderDetails, setOrderDetails] = useState(null);
   const [allOrdersForAllUsers, setAllOrdersForAllUsers] = useState([]);
+  const [selectedQuantity, setSelectedQuantity] = useState([]);
+  const [selectedSize, setSelectedSize] = useState([]);
+  const [selectedColor, setSelectedColor] = useState([]);
 
   const router = useRouter();
   const pathName = usePathname();
@@ -122,6 +125,12 @@ export default function GlobalState({ children }) {
         setOrderDetails,
         allOrdersForAllUsers,
         setAllOrdersForAllUsers,
+        selectedQuantity,
+        setSelectedQuantity,
+        selectedSize,
+        setSelectedSize,
+        selectedColor,
+        setSelectedColor,
       }}
     >
       {children}

@@ -158,7 +158,7 @@ export default function Account() {
                         <p>Address : {item.address}</p>
                         <p>City : {item.city}</p>
                         <p>Country : {item.country}</p>
-                        <p>PostalCode : {item.postalCode}</p>
+                        <p>Phone : {item.postalCode}</p>
                         <button
                           onClick={() => handleUpdateAddress(item)}
                           className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"

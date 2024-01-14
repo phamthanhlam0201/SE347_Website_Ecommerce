@@ -11,7 +11,15 @@ const OrderSchema = new mongoose.Schema(
     },
     orderItems: [
       {
-        qty: { type: Number, required: true },
+        size: {
+          type: String,
+          required: true,
+        },
+        qtys: { type: Number, required: true,},
+        color: {
+          type: String,
+          required: true,
+        },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Products",

@@ -71,15 +71,15 @@ export default function Orders() {
                         key={item._id}
                         className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
                       >
-                        <div className="flex">
-                          <h1 className="font-bold text-lg mb-3 flex-1">
+                        <div className="flex flex-col lg:flex-row">
+                          <h1 className="font-bold text-lg mb-3 flex-1 lg:mb-0">
                             #order: {item._id}
                           </h1>
                           <div className="flex items-center">
                             <p className="mr-3 text-sm font-medium text-gray-900">
-                              Total paid amount
+                              Total paid amount: 
                             </p>
-                            <p className="mr-3 text-2xl  font-semibold text-gray-900">
+                            <p className="mr-3 text-xl  font-semibold text-gray-900">
                               {item.totalPrice} VNĐ
                             </p>
                           </div>

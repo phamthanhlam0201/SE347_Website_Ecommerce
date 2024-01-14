@@ -44,34 +44,40 @@ export default function Login() {
   async function handleLogin() {
     setComponentLevelLoader({ loading: true, id: "" });
     const res = await login(formData);
-
+  
     console.log(res);
-
+  
     if (res.success) {
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
+        onClose: () => {
+          setIsAuthUser(true);
+          setUser(res?.finalData?.user);
+          setFormData(initialFormdata);
+          Cookies.set("token", res?.finalData?.token);
+          localStorage.setItem("user", JSON.stringify(res?.finalData?.user));
+          setComponentLevelLoader({ loading: false, id: "" });
+        },
       });
-      setIsAuthUser(true);
-      setUser(res?.finalData?.user);
-      setFormData(initialFormdata);
-      Cookies.set("token", res?.finalData?.token);
-      localStorage.setItem("user", JSON.stringify(res?.finalData?.user));
-      setComponentLevelLoader({ loading: false, id: "" });
     } else {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
+        onClose: () => {
+          setIsAuthUser(false);
+          setComponentLevelLoader({ loading: false, id: "" });
+        },
       });
-      setIsAuthUser(false);
-      setComponentLevelLoader({ loading: false, id: "" });
     }
   }
-
-  console.log(isAuthUser, user);
-
+  
   useEffect(() => {
-    if (isAuthUser) router.push("/");
+    if (isAuthUser) {
+      setTimeout(() => {
+        router.push("/");
+      }, 4000); // Adjust the delay as needed
+    }
   }, [isAuthUser]);
-
+  
   return (
     <div className="bg-white relative">
       <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
@@ -100,7 +106,7 @@ export default function Login() {
                 )}
                 <button
                   className="disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
-                     text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
+                     text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide rounded-md
                      "
                   disabled={!isValidForm()}
                   onClick={handleLogin}
@@ -120,7 +126,7 @@ export default function Login() {
                 <div className="flex flex-col gap-2">
                   <p>Create a new account</p>
                   <button
-                    className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
+                    className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg rounded-md
                      text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
                      "
                     onClick={() => router.push("/register")}

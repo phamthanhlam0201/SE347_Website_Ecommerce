@@ -7,7 +7,7 @@ export default function ProductTile({ item }) {
   
   return (
     <div  onClick={()=> router.push(`/product/${item._id}`)}>
-      <div className="overflow-hideen aspect-w-1 aspect-h-1 h-52">
+      <div className="overflow-hideen aspect-w-1 aspect-h-1 h-70">
         <img
           src={item.imageUrl}
           alt="Product image"
@@ -38,7 +38,9 @@ export default function ProductTile({ item }) {
             <p className="mr-1 text-sm font-semibold">{`-(${item.priceDrop}%)`}</p>
           ) : null}
         </div>
-        <h3 className="md-2 text-gray-400 text-sm">{item.name}</h3>
+        <h4 className="md-2 text-gray-800 text-sm">Name: {item.name}</h4>
+        <h4 className="md-2 text-gray-800 text-sm">Category: {item.category}</h4>
+        <h4 className="md-2 text-gray-800 text-sm">Quantity available: {item.deliveryInfo}</h4>
       </div>
     </div>
   );
