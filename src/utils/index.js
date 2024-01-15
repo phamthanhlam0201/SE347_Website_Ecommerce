@@ -10,21 +10,38 @@ export const navOptions = [
     path: "/product/listing/all-products",
   },
   {
-    id: "listingT-Shirts",
-    label: "T-Shirts",
-    path: "/product/listing/t-shirts",
+    id: "category",
+    label: "Category",
+    subItems: [
+      {
+        id: "listingT-Shirts",
+        label: "T-Shirts",
+        path: "/product/listing/t-shirts",
+      },
+      {
+        id: "listingShirts",
+        label: "Shirts",
+        path: "/product/listing/shirts",
+      },
+      {
+        id: "listingJeans",
+        label: "Jeans",
+        path: "/product/listing/jeans",
+      },
+      {
+        id: "listingPants",
+        label: "Pants",
+        path: "/product/listing/pants",
+      },
+      {
+        id: "listingSales",
+        label: "Sale",
+        path: "/product/listing/sales",
+      },
+    ],
   },
-  {
-    id: "listingShirts",
-    label: "Shirts",
-    path: "/product/listing/shirts",
-  },
-  {
-    id: "listingSales",
-    label: "Sale",
-    path: "/product/listing/sales",
-  }
 ];
+
 
 export const adminNavOptions = [
   {

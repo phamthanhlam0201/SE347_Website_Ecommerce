@@ -2,7 +2,7 @@
 
 import { GlobalContext } from "@/context";
 import { adminNavOptions, navOptions } from "@/utils";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect, useState, useRef} from "react";
 import CommonModal from "../CommonModal";
 import Cookies from "js-cookie";
 import { usePathname, useRouter } from "next/navigation";
@@ -12,37 +12,92 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 import { FaUserGroup } from "react-icons/fa6";
 
 function NavItems({ isModalView = false, isAdminView, router }) {
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const closeTimeoutRef = useRef(null);
+
+  const handleCategoryClick = () => {
+    setIsCategoryOpen(!isCategoryOpen);
+  };
+
+  const handleCategoryMouseEnter = () => {
+    setIsCategoryOpen(true);
+    clearTimeout(closeTimeoutRef.current);
+  };
+
+  const handleCategoryMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsCategoryOpen(false);
+    }, 100);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    // Đóng dropdown khi chuột rời khỏi container
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsCategoryOpen(false);
+    }, 100);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
+
+  const options = isAdminView ? adminNavOptions : navOptions;
+
   return (
     <div
       className={`items-center justify-between w-full md:flex md:w-auto ${
-        isModalView ? "" : "hidden"
+        isModalView ? '' : 'hidden'
       }`}
       id="nav-items"
     >
       <ul
-        className={`flex flex-col p-4 md:p-0 mt-4 font-medium  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white ${
-          isModalView ? "border-none" : "border border-gray-100"
-        }`} style={{ backgroundColor: "#73c6d9" }}
+        className={`flex flex-col p-4 md:p-0 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white ${
+          isModalView ? 'border-none' : 'border border-gray-100'
+        }`}
+        style={{ backgroundColor: '#73c6d9' }}
       >
-        {isAdminView
-          ? adminNavOptions.map((item) => (
-              <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
-                key={item.id}
-                onClick={() => router.push(item.path)}
+        {options.map((item) => (
+          <li key={item.id} className="relative group">
+            <div
+              className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 ${
+                item.id === 'category' ? 'hover:bg-gray-200' : ''
+              }`}
+              onClick={() => {
+                if (item.id === 'category') {
+                  handleCategoryClick();
+                } else {
+                  router.push(item.path);
+                }
+              }}
+              onMouseEnter={item.id === 'category' ? handleCategoryMouseEnter : null}
+            >
+              {item.label}
+            </div>
+            {item.subItems && (
+              <ul
+                className={`${
+                  isCategoryOpen ? 'block' : 'hidden'
+                } absolute left-0 mt-2 space-y-2 bg-white text-gray-900 border border-gray-100 rounded-md w-[100px]`}
+                style={{ zIndex: 10 }}
+                onMouseLeave={handleDropdownMouseLeave}  // Sử dụng sự kiện onMouseLeave trên container
               >
-                {item.label}
-              </li>
-            ))
-          : navOptions.map((item) => (
-              <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
-                key={item.id}
-                onClick={() => router.push(item.path)}
-              >
-                {item.label}
-              </li>
-            ))}
+                {item.subItems.map((subItem) => (
+                  <li
+                    key={subItem.id}
+                    className="cursor-pointer block px-4 py-2"
+                    onClick={() => {
+                      router.push(subItem.path);
+                    }}
+                  >
+                    {subItem.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );
