@@ -129,8 +129,19 @@ export default function Home() {
           <div className="col-span-12 lg:col-span-4">
             <div>
               <h3 className="text-xl font-bold text-gray-950 sm:text-xl">SUPPORTING POLICIES</h3>
-              <p>Introduce</p>
-              <p>Return policy</p>
+              <button
+                onClick={() => router.push('/')}
+                className="cursor-pointer text-blue-500 hover:underline"
+              >
+                Introduce
+              </button>
+              <br/>
+              <button
+                onClick={() => router.push('/')}
+                className="cursor-pointer text-blue-500 hover:underline"
+              >
+                Return policy
+              </button>
             </div>
           </div>
 
@@ -138,7 +149,16 @@ export default function Home() {
           <div className="col-span-12 lg:col-span-3">
             <div>
               <h3 className="text-xl font-bold text-gray-950 sm:text-xl">LINK INFORMATION</h3>
-              <p>Please connect with us</p>
+              <p>Please connect with us:</p>
+              {/* Liên kết Facebook */}
+              <a
+                href="https://www.facebook.com"
+                target="_blank"  // Mở liên kết trong cửa sổ mới
+                rel="noopener noreferrer"  // Đề phòng lỗ hổng bảo mật
+                className="text-blue-500 hover:underline"
+              >
+                Facebook Page
+              </a>
             </div>
           </div>
         </div>

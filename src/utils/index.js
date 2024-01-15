@@ -150,7 +150,15 @@ export const adminAddProductformControls = [
       {
         id: "shirts",
         label: "Shirts",
-      }
+      },
+      {
+        id: "jeans",
+        label: "Jeans",
+      },
+      {
+        id: "pants",
+        label: "Pants",
+      },
     ],
   },
   {

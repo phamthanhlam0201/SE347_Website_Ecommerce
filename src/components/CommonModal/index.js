@@ -3,6 +3,18 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
+const modalStyles = {
+  position: 'fixed',
+  top: 20,
+  right: 0,
+  width: '30%', // Set the width to 25% of the viewport
+  transform: 'translate(-20px, -20px)', // Adjust as needed for spacing
+  backgroundColor: '#73c6d9',
+  borderRadius: '0.375rem',
+  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+  // Add other styles as needed
+};
+
 export default function CommonModal({
   modalTitle,
   mainContent,
@@ -24,9 +36,9 @@ export default function CommonModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
-        <div className="fixed inset-0 overflow-hidden">
+        <div className="fixed inset-0 overflow-hidden ">
           <div className="absolute inset-0 overflow-hidden">
             <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
               <Transition.Child
@@ -38,7 +50,7 @@ export default function CommonModal({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Panel className={"w-screen max-w-md"}>
+                <Dialog.Panel className={"w-screen max-w-md"} style={modalStyles}>
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       {

@@ -17,6 +17,11 @@ module.exports = {
       backgroundColor: {
         'light-blue': '#73c6d9',
       },
+      variants: {
+        extend: {
+          justifyContent: ['responsive', 'hover', 'focus', 'active', 'group', 'focus-within'],
+        },
+      },
     },
   },
   plugins: [],
