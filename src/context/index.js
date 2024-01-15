@@ -54,6 +54,9 @@ export default function GlobalState({ children }) {
   const [selectedQuantity, setSelectedQuantity] = useState([]);
   const [selectedSize, setSelectedSize] = useState([]);
   const [selectedColor, setSelectedColor] = useState([]);
+  const [userComment, setUserComment] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState([]);
+  const [isCommentFocused, setIsCommentFocused] = useState([]);
 
   const router = useRouter();
   const pathName = usePathname();
@@ -131,6 +134,12 @@ export default function GlobalState({ children }) {
         setSelectedSize,
         selectedColor,
         setSelectedColor,
+        userComment,
+        setUserComment,
+        isSubmitting,
+        setIsSubmitting,
+        isCommentFocused,
+        setIsCommentFocused,
       }}
     >
       {children}

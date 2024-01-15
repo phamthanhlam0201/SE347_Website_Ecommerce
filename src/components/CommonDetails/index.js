@@ -2,13 +2,16 @@
 
 import { GlobalContext } from "@/context";
 import { useContext } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import { addToCart } from "@/services/cart";
+import { addCommentToProduct, getAllComments } from "@/services/comment";
 import Notification from "../Notification";
 import React, { useState } from "react";
+import { FaUserGroup } from "react-icons/fa6";
+import { parseISO, format } from 'date-fns';
 
-export default function CommonDetails({ item }) {
+export default function CommonDetails({ item, cmtitem }) {
   const {
     setComponentLevelLoader,
     componentLevelLoader,
@@ -17,10 +20,87 @@ export default function CommonDetails({ item }) {
   } = useContext(GlobalContext);
 
   const [selectedSize, setSelectedSize] = useState(null); // Add
-  const [availableSizes, setAvailableSizes] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);  
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('black');
 
+  const [userComment, setUserComment] = useState(""); // update
+  const [isCommentFocused, setIsCommentFocused] = useState(false);
+
+
+  // display comment
+  console.log(cmtitem)
+
+  const handleCommentFocus = () => {
+    setIsCommentFocused(true);
+  };
+
+  function processDateInfo(inputDate) {
+    const parsedDate = parseISO(inputDate);
+  
+    const formattedDate = format(parsedDate, 'yyyy-MM-dd');
+    const dayOfWeek = format(parsedDate, 'EEEE');
+  
+    return {
+      date: formattedDate,
+      dayOfWeek: dayOfWeek,
+    };
+  }
+  function renderTime(createdAt) {
+    const dateInfo = processDateInfo(createdAt);
+    return `${dateInfo.dayOfWeek}, ${dateInfo.date}`;
+  }
+  async function handleAddComment() {
+    try{
+      setIsSubmitting(true); // Bắt đầu submit
+      console.log("Comment data:", {
+        userID: user._id,
+        name: user.name,
+        productID: item._id,
+        cmt: userComment,
+      });
+
+      const res = await addCommentToProduct({
+        userID: user._id,
+        name: user.name,
+        productID: item._id,
+        cmt: userComment,
+      });
+
+      console.log("Response from server:", res);
+
+      if (res.success){
+        toast.success(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        setUserComment("");
+      }
+      else{
+        toast.error(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+      
+    }
+    catch (error) {
+      console.error("Error adding comment:", error);
+      toast.error("Something went wrong! Please try again later.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  finally {
+    // Ensure that the button is hidden even in case of an error
+    setIsSubmitting(false); // Kết thúc submit
+  }}
+
+  const handleCommentBlur = () => {
+    // Kiểm tra xem có đang trong quá trình submit không
+    if (isSubmitting) {
+      setIsCommentFocused(false);
+      // Thực hiện các bước cần thiết khi blur
+    }
+  };
   // ColorDropdown component
   const ColorDropdown = ({ availableColors, selectedColor, setSelectedColor }) => {
     return (
@@ -37,7 +117,29 @@ export default function CommonDetails({ item }) {
       </select>
     );
   };
-
+  // const renderComments = () => {
+  //   return (
+  //       <div className="container mx-auto px-4 mb-2">
+  //         <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
+  //           <p className="py-4 text-xl font-bold text-gray-900">Comments</p>
+  //         </div>
+  //         {Array.isArray(cmtitem) && cmtitem.length > 0 ? (
+  //           <ul className="list-disc pl-4">
+  //             {cmtitem
+  //               .filter(comment => comment.productID === (item && item._id))
+  //               .map(filteredComment => (
+  //                 <li key={filteredComment._id} className="mb-2">
+  //                   <FaUserGroup size={65} className="bg-light-blue text-white mr-2" />
+  //                   {filteredComment.cmt}
+  //                 </li>
+  //               ))}
+  //           </ul>
+  //         ) : (
+  //           <p>No comments available.</p>
+  //         )}
+  //       </div>
+  //   );
+  // };
   async function handleAddToCart(getItem) {
 
     if (!selectedSize) {
@@ -70,7 +172,7 @@ export default function CommonDetails({ item }) {
   return (
 
     <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 border-b border-gray-400">
         <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
           <div className="lg:col-span-3 lg:row-end-1">
             <div className="lg:flex lg:items-start">
@@ -210,7 +312,7 @@ export default function CommonDetails({ item }) {
             </div>
 
             <div className="lg:col-span-3">
-              <div className="border-b border-gray-400">
+              <div>
                 <nav className="flex gap-4">
                   <a
                     href="#"
@@ -224,10 +326,61 @@ export default function CommonDetails({ item }) {
             </div>
           </div>
         </div>
-        <div>
-          {/* code here */}
+      </div>
+      <div className="container mx-auto px-4 mb-2">
+        <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
+            <p className="py-4 text-xl font-bold text-gray-900">Comment</p>
+        </div>
+        <div className="flex items-center relative">
+          <div className="flex-grow">
+            <div className="flex items-center mb-2">
+              <FaUserGroup size={60} className=" mr-2 rounded-md" />
+              <textarea
+                value={userComment}
+                onChange={(e)=>{
+                  setUserComment(String(e.target.value))}}
+                onFocus={handleCommentFocus}
+                onBlur={handleCommentBlur}
+                placeholder="Type your comment here..."
+                className={`container px-2 py-2 border ${
+                  isCommentFocused ? "border-gray-400" : "border-gray-300"
+                } focus:border-gray-400 focus:outline-none transition-all duration-300`}
+              />
+            </div>
+          </div>
+          {isCommentFocused && (
+            <div className="ml-2">
+              <button 
+                onClick={handleAddComment}
+                className="inline-block px-4 py-2 text-xs font-medium uppercase tracking-wide text-black border border-gray-400 rounded-md font-bold bg-light-blue">
+                Submit
+              </button>
+            </div>
+          )}
         </div>
       </div>
+      <div className="container mx-auto px-4 mb-2">
+          {Array.isArray(cmtitem) && cmtitem.length > 0 ? (
+            <div>
+              {cmtitem
+                .filter(comment => comment.productID === (item && item._id))
+                .map(filteredComment => (
+                  <div key={filteredComment._id} className="flex items-center relative mb-2">
+                    <FaUserGroup size={60} className="mr-2" />
+                    
+                    <p className="container px-2 py-2 border">
+                      {filteredComment.name}<br/>
+                      {filteredComment.cmt}<br/>
+                      {/* code here */}
+                      {`Created at: ${renderTime(filteredComment.createdAt)}`}
+                      </p>
+                  </div>
+                ))}
+            </div>
+          ) : (
+            <p>No comments available.</p>
+          )}
+        </div>
       <Notification/>
     </section>
   );

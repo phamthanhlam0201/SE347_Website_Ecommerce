@@ -6,3 +6,4 @@ export default async function SaleAllProducts() {
 
   return <CommonListing data={getAllProducts && getAllProducts.data} />;
 }
+

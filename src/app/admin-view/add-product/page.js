@@ -70,7 +70,7 @@ const initialFormData = {
   onSale: "no",
   imageUrl: "",
   priceDrop: 0,
-};
+}; 
 
 export default function AdminAddNewProduct() {
   const [formData, setFormData] = useState(initialFormData);
@@ -102,39 +102,7 @@ export default function AdminAddNewProduct() {
       });
     }
   }
-
-  // function handleTileClickSizes(getCurrentItem) {
-  //   let cpySizes = [...formData.sizes];
-  //   const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
-
-  //   if (index === -1) {
-  //     cpySizes.push(getCurrentItem);
-  //   } else {
-  //     cpySizes = cpySizes.filter((item) => item.id !== getCurrentItem.id);
-
-  //   }
-
-  //   setFormData({
-  //     ...formData,
-  //     sizes: cpySizes,
-  //   });
-  // }
-
-  // function handleTileClickColors(getCurrentItem) {
-  //   let cpyColors = [...formData.colors];
-  //   const index = cpyColors.findIndex((item) => item.id === getCurrentItem.id);
-
-  //   if (index === -1) {
-  //     cpyColors.push(getCurrentItem);
-  //   } else {
-  //     cpyColors = cpyColors.filter((item) => item.id !== getCurrentItem.id);
-  //   }
-
-  //   setFormData({
-  //     ...formData,
-  //     colors: cpyColors,
-  //   });
-  // }
+  
   function handleTileClickSizes(getCurrentItem) {
     const cpySizes = [...formData.sizes];
     const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
