@@ -216,19 +216,19 @@ export const AvailableSizes = [
 
 export const AvailableColors = [
   {
-    id: "black",
+    id: "Black",
     label: "Black",
   },
   {
-    id: "white",
+    id: "White",
     label: "White",
   },
   {
-    id: "gray",
+    id: "Gray",
     label: "Gray",
   },
   {
-    id: "blue",
+    id: "Blue",
     label: "Blue",
   },
 ];

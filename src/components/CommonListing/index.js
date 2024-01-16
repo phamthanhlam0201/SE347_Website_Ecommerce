@@ -27,7 +27,7 @@ export default function CommonListing({ data }) {
     const newData = data.filter((item) => {
       const categoryPass = filters.category === "All" || item.category === filters.category || item.onSale ===filters.category;
       // Kiểm tra xem item.color là mảng và filter.color có tồn tại trong mảng không
-      const colorPass = filters.color === "All" || (Array.isArray(item.colors) && item.colors.some(colors => colors.id === filters.color));
+      const colorPass = filters.color === "All" || (Array.isArray(item.colors) && item.colors.some(colors => colors.label === filters.color));
       // Kiểm tra xem filters.price và item.price có tồn tại và là chuỗi số hợp lệ không
       const pricePass =
         filters.price === "" ||
