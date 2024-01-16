@@ -56,6 +56,8 @@ const ProductFilter = ({ onFilterChange, onFilterSubmit, onClearFilters }) => {
               <option value="Shirts">Shirts</option>
               <option value="Pants">Pants</option>
               <option value="Jeans">Jeans</option>
+              <option value="yes">Sales</option>
+
               {/* Thêm các lựa chọn khác cho Category nếu cần */}
             </select>
           </div>
