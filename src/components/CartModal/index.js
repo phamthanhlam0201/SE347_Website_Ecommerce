@@ -80,9 +80,9 @@ export default function CartModal() {
       setShow={setShowCartModal}
       mainContent={
         cartItems && cartItems.length ? (
-          <ul role="list" className="-my-6 divide-y divide-gray-300">
+          <ul role="list" className="my-4 md:-my-6 divide-y divide-gray-300 ml-0 md:ml-2">
             {cartItems.map((cartItem) => (
-              <li key={cartItem._id} className="flex py-6">
+              <li key={cartItem._id} className="flex pt-10 md:pt-4">
                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                   <img
                     src={
@@ -94,8 +94,8 @@ export default function CartModal() {
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
-                <div className="ml-4 flex flex-1 flex-col">
-                  <div>
+                <div className="ml-3 md:ml-4 max-w-screen-sm flex flex-1 flex-col">
+                  <div className="mr-4 md:mr-0">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <h3>
                         <a>
@@ -113,7 +113,7 @@ export default function CartModal() {
                       
                     </p>
                   </div>
-                  <div className="flex flex-1 items-end justify-between text-sm">
+                  <div className="flex flex-1 items-end justify-between text-sm mr-4 md:mr-0">
                     <button
                       type="button"
                       className="font-medium text-yellow-600 sm:order-2"
@@ -148,7 +148,7 @@ export default function CartModal() {
               router.push("/cart");
               setShowCartModal(false);
             }}
-            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide rounded-md"
+            className="ml-0  md:ml-2 mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide rounded-md"
           >
             Go To Cart
           </button>
@@ -159,11 +159,11 @@ export default function CartModal() {
               router.push("/checkout");
               setShowCartModal(false);
             }}
-            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50 rounded-md"
+            className="ml-0 md:ml-2  mt-1.5 w-full inline-block bg-black text-white px-2 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50 rounded-md"
           >
             Checkout
           </button>
-          <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
+          <div className=" ml-0  md:ml-2 mt-6 flex justify-center text-center text-sm text-gray-600">
             <button type="button" className="font-medium text-grey rounded-md" onClick={() => {router.push("/product/listing/all-products"); setShowCartModal(false);}}>
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>

@@ -184,9 +184,9 @@ export default function AdminAddNewProduct() {
               selected={formData.colors}
               onClick={handleTileClickColors}
               data={AvailableColors}
-
             />
           </div>
+
 
           <div className="flex gap-2 flex-col">
             <label>Available sizes</label>
@@ -197,9 +197,10 @@ export default function AdminAddNewProduct() {
             />
           </div>
 
-          {adminAddProductformControls.map((controlItem) =>
+          {adminAddProductformControls.map((controlItem, index) =>
             controlItem.componentType === "textarea" ? (
               <TextAreaComponent
+                key={index}
                 type={controlItem.type}
                 placeholder={controlItem.placeholder}
                 label={controlItem.label}
@@ -213,6 +214,7 @@ export default function AdminAddNewProduct() {
               />
             ):controlItem.componentType === "input" ? (
               <InputComponent
+                key={index}
                 type={controlItem.type}
                 placeholder={controlItem.placeholder}
                 label={controlItem.label}
@@ -226,6 +228,7 @@ export default function AdminAddNewProduct() {
               />
             ) : controlItem.componentType === "select" ? (
               <SelectComponent
+                key={index}
                 label={controlItem.label}
                 options={controlItem.options}
                 value={formData[controlItem.id]}

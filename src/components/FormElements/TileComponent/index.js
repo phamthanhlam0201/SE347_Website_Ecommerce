@@ -4,7 +4,7 @@ export default function TileComponent({ data, selected = [], onClick }) {
       {data.map((dataItem) => (
         <label
           onClick={() => onClick(dataItem)}
-          className={`cursor-pointer ${
+          className={`cursor-pointer mt-4 mr-4 ${
             selected &&
             selected.length &&
             selected.map((item) => item.id).indexOf(dataItem.id) !== -1

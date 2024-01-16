@@ -35,7 +35,7 @@ export const navOptions = [
       },
       {
         id: "listingSales",
-        label: "Sale",
+        label: "Sales",
         path: "/product/listing/sales",
       },
     ],
@@ -46,13 +46,18 @@ export const navOptions = [
 export const adminNavOptions = [
   {
     id: "adminListing",
-    label: "Manage All Products",
+    label: "ManageProducts",
     path: "/admin-view/all-products",
   },
   {
     id: "adminNewProduct",
-    label: "Add New Product",
+    label: "AddProduct",
     path: "/admin-view/add-product",
+  },
+  {
+    id: "adminAllOrders",
+    label: "AllOrders",
+    path: "/admin-view",
   },
 ];
 
@@ -144,19 +149,19 @@ export const adminAddProductformControls = [
     componentType: "select",
     options: [
       {
-        id: "t-shirts",
+        id: "T-Shirts",
         label: "T-Shirts",
       },
       {
-        id: "shirts",
+        id: "Shirts",
         label: "Shirts",
       },
       {
-        id: "jeans",
+        id: "Jeans",
         label: "Jeans",
       },
       {
-        id: "pants",
+        id: "Pants",
         label: "Pants",
       },
     ],

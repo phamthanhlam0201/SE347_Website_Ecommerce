@@ -5,12 +5,12 @@ import { Fragment } from "react";
 
 const modalStyles = {
   position: 'fixed',
-  top: 20,
+  top: 40,
   right: 0,
-  width: '30%', // Set the width to 25% of the viewport
+  width: '40%', // Set the width to 25% of the viewport
   transform: 'translate(-20px, -20px)', // Adjust as needed for spacing
   backgroundColor: '#73c6d9',
-  borderRadius: '0.375rem',
+  borderRadius: '1rem',
   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
   // Add other styles as needed
 };
@@ -51,7 +51,7 @@ export default function CommonModal({
                 leaveTo="opacity-0"
               >
                 <Dialog.Panel className={"w-screen max-w-md"} style={modalStyles}>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl rounded-lg">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       {
                         showModalTitle ?  <div className="flex items-start justify-between">

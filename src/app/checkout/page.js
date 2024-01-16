@@ -198,7 +198,7 @@ export default function Checkout() {
   }
 
   return (
-    <div>
+    <div className="mt-10 md:mt-4">
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div className="px-4 pt-8">
           <p className="font-medium text-xl">Cart Summary</p>

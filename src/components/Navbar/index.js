@@ -1,7 +1,7 @@
 
 
 "use client";
-
+import { FaFilter } from "react-icons/fa6";
 import { GlobalContext } from "@/context";
 import { adminNavOptions, navOptions } from "@/utils";
 import { Fragment, useContext, useEffect, useState, useRef} from "react";
@@ -12,6 +12,8 @@ import CartModal from "../CartModal";
 import { RiAccountCircleFill, RiAdminFill, RiLogoutCircleRLine, RiLoginCircleLine } from "react-icons/ri";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { FaUserGroup } from "react-icons/fa6";
+import { IoFilter } from "react-icons/io5";
+import Select from 'react-select';
 
 function NavItems({ isModalView = false, isAdminView, router, closeNavbar }) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -42,21 +44,20 @@ function NavItems({ isModalView = false, isAdminView, router, closeNavbar }) {
 
   return (
     <div
-      className={`items-center justify-between w-1/2 md:w-full md:flex md:w-auto ${
+      className={`items-center justify-between w-1/2 md:w-full md:flex md:w-auto ml-5 md:ml-5 ${
         isModalView ? '' : 'hidden'
       }`}
       id="nav-items"
     >
       <ul
-        className={`flex flex-col p-4 md:p-0 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 items-center ml-8 ${
+        className={`flex flex-col p-6 md:p-0 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 items-center ml-5 md:ml-5 ${
           isModalView ? 'border-none' : 'border border-gray-100'
         }`}
-        // style={{ backgroundColor: '#73c6d9' }}
       >
         {options.map((item) => (
           <li key={item.id} className="relative group">
             <div
-              className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 ${
+              className={`cursor-pointer block py-3 pl-3 pr-4 text-gray-900 rounded md:p-0 ${
                 item.id === 'category' ? 'hover:bg-gray-200' : ''
               }`}
               onClick={() => {
@@ -100,6 +101,95 @@ function NavItems({ isModalView = false, isAdminView, router, closeNavbar }) {
   );
 }
 
+
+// function Filters({ isModalView = false, setShowFilters }) {
+//   const categoryOptions = [
+//     { value: 'tshirts', label: 'T-Shirts' },
+//     { value: 'shirts', label: 'Shirts' },
+//     { value: 'pants', label: 'Pants' },
+//     { value: 'jeans', label: 'Jeans' },
+//   ];
+
+//   const colorOptions = [
+//     { value: 'black', label: 'Black' },
+//     { value: 'white', label: 'White' },
+//     { value: 'gray', label: 'Gray' },
+//     { value: 'blue', label: 'Blue' },
+//   ];
+
+//   const [selectedCategory, setSelectedCategory] = useState(null);
+//   const [selectedColor, setSelectedColor] = useState(null);
+//   const [inputPrice, setInputPrice] = useState('');
+//   const closeTimeoutRef = useRef(null);
+
+//   const handleCategorySelect = (selectedOption) => {
+//     setSelectedCategory(selectedOption);
+//   };
+
+//   const handleColorSelect = (selectedOption) => {
+//     setSelectedColor(selectedOption);
+//   };
+
+//   const handlePriceInputChange = (event) => {
+//     setInputPrice(event.target.value);
+//   };
+
+//   const handleFilterButtonClick = () => {
+//     // Perform filtering here using selectedCategory, selectedColor, and inputPrice
+//     console.log('Performing filter with:', selectedCategory, selectedColor, inputPrice);
+
+//     // Close the filter navbar after performing the filter
+//     setShowFilters(false);
+//   };
+
+//   return (
+//     <div className={`relative ${isModalView ? '' : 'hidden'}`}>
+      
+//         <div className="flex gap-4 p-4 bg-white border border-gray-100 rounded-md shadow-md">
+//           {/* Category Select */}
+//           <div>
+//             <label className="block text-gray-700 font-medium mb-2">Category:</label>
+//             <Select
+//               options={categoryOptions}
+//               value={selectedCategory}
+//               onChange={handleCategorySelect}
+//               isSearchable={false}
+//             />
+//           </div>
+
+//           {/* Color Select */}
+//           <div>
+//             <label className="block text-gray-700 font-medium mb-2">Color:</label>
+//             <Select
+//               options={colorOptions}
+//               value={selectedColor}
+//               onChange={handleColorSelect}
+//               isSearchable={false}
+//             />
+//           </div>
+
+//           {/* Input for Price */}
+//           <div>
+//             <label className="block text-gray-700 font-medium mb-2">Price:</label>
+//             <input
+//               type="number"
+//               value={inputPrice}
+//               onChange={handlePriceInputChange}
+//               placeholder="Enter price"
+//               className="w-full px-3 py-2 border border-gray-300 rounded-md"
+//             />
+//           </div>
+
+//           {/* Button for Filter */}
+//           <button onClick={handleFilterButtonClick} className="bg-blue-500 text-white py-2 px-4 rounded-md">
+//             Filter
+//           </button>
+//         </div>
+//     </div>
+//   );
+// }
+
+
 export default function Navbar() {
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
   const {
@@ -142,14 +232,14 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white fixed w-full z-20 top-0 right-0 border-b border-gray-200" style={{ backgroundColor: "#73c6d9" }}>
+      <nav className="fixed w-full z-20 top-0 right-0 border-b border-gray-200" style={{ backgroundColor: "#73c6d9" }}>
         <div className="max-w-screen-xl flex flex-col md:flex-row items-center justify-between mx-auto p-3">
           <div
             onClick={() => router.push("/")}
             className="flex items-center cursor-pointer"
           >
             <img
-              src="images/logo.png"
+              src="https://firebasestorage.googleapis.com/v0/b/se347-ecommerce.appspot.com/o/ecommerce%2Flogo.png?alt=media&token=7331aa67-8747-4e02-9f77-04cdc486c2cb"
               alt="Logo"
               className="w-14 h-14"
             />
@@ -163,7 +253,7 @@ export default function Navbar() {
                 <Fragment>
                   <button
                     className={
-                      "inline-block px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500 "
+                      "inline-block px-4 md:px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500 "
                     }
                     onClick={()=>router.push('/account')}
                   >
@@ -171,7 +261,7 @@ export default function Navbar() {
                   </button>
                   <button
                     className={
-                      "inline-block px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
+                      "inline-block px-4 md:px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
                     }
                     onClick={()=> setShowCartModal(true)}
                   >
@@ -183,7 +273,7 @@ export default function Navbar() {
                   isAdminView ? (
                     <button
                       className={
-                        "inline-block px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
+                        "inline-block px-4 md:px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
                       }
                       onClick={() => router.push("/")}
                     >
@@ -193,7 +283,7 @@ export default function Navbar() {
                     <button
                       onClick={() => router.push("/admin-view")}
                       className={
-                        "inline-block px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
+                        "inline-block px-4 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
                       }
                     >
                     <RiAdminFill size={25} title="Admin View"/>
@@ -204,7 +294,7 @@ export default function Navbar() {
                   <button
                     onClick={handleLogout}
                     className={
-                      "inline-block px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
+                      "inline-block px-4 md:px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
                     }
                   >
                   <RiLogoutCircleRLine size={25} title="Logout"/>
@@ -213,7 +303,7 @@ export default function Navbar() {
                   <button
                     onClick={() => router.push("/login")}
                     className={
-                      "inline-block px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
+                      "inline-block px-4 md:px-5 py-3 text-xs font-medium upprcase tracking-wide text-red-500"
                     }
                   >
                   <RiLoginCircleLine size={25} title="Login"/>
@@ -266,3 +356,4 @@ export default function Navbar() {
     </>
   );
 }
+

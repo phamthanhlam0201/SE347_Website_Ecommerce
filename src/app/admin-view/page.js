@@ -71,7 +71,7 @@ export default function AdminView() {
 
   return (
     <section>
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-12 lg:mt-0">
         <div>
           <div className="px-4 py-6 sm:px-8 sm:py-10">
             <div className="flow-root">
@@ -82,11 +82,11 @@ export default function AdminView() {
                       key={item._id}
                       className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
                     >
-                      <div className="flex">
+                      <div className="lg:flex lg:flex-row lg:items-center lg:justify-between flex-col gap-2">
                         <h1 className="font-bold text-lg mb-3 flex-1">
                           #order: {item._id}
                         </h1>
-                        <div className="flex flex-col gap-2">
+                        <div className="lg:flex flex-col gap-2">
                           <div className="flex items-center">
                             <p className="mr-3 text-sm font-medium text-gray-900">
                               User Name :

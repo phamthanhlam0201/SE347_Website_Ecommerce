@@ -63,7 +63,7 @@ export default function Orders() {
         <div className="mt-8 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div>
             <div className="px-4 py-6 sm:px-8 sm:py-10">
-              <div className="flow-root">
+              <div className="flow-root mt-10 md:mt-0">
                 {allOrdersForUser && allOrdersForUser.length ? (
                   <ul className="flex flex-col gap-4">
                     {allOrdersForUser.map((item) => (
@@ -79,7 +79,7 @@ export default function Orders() {
                             <p className="mr-3 text-sm font-medium text-gray-900">
                               Total paid amount: 
                             </p>
-                            <p className="mr-3 text-xl  font-semibold text-gray-900">
+                            <p className="mr-3 text-sm  font-semibold text-gray-900">
                               {item.totalPrice} VNĐ
                             </p>
                           </div>

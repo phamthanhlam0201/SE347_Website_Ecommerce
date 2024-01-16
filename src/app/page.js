@@ -81,13 +81,64 @@ export default function Home() {
             <li>
               <div className="relative block group">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcD22zJWpm8FThK60-nkBpFB5j2e_RkJdijg&usqp=CAU"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVAy6a-0WkZJ31N6DSD-6PxvdqIsRLNgaZRA&usqp=CAU"
                   className="object-cover w-full aspect-square"
                 />
                 <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
                   <h3 className="text-xl font-medium text-white">SHIRTS</h3>
                   <button
                     onClick={() => router.push("/product/listing/shirts")}
+                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  >
+                    Shop Now
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="relative block group">
+                <img
+                  src="https://floritaquan7.com/wp-content/uploads/2021/12/shop-quan-ao-nam-tphcm-dep-nhat-danh-cho-phai-manh.jpg"
+                  className="object-cover w-full aspect-square"
+                />
+                <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
+                  <h3 className="text-xl font-medium text-white">PAINTS</h3>
+                  <button
+                    onClick={() => router.push("/product/listing/pants")}
+                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  >
+                    Shop Now
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="relative block group">
+                <img
+                  src="https://mcdn.coolmate.me/image/December2020/shop-quan-jean-nam-ha-noi-7.jpg"
+                  className="object-cover w-full aspect-square"
+                />
+                <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
+                  <h3 className="text-xl font-medium text-white">JEANS</h3>
+                  <button
+                    onClick={() => router.push("/product/listing/jeans")}
+                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  >
+                    Shop Now
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="relative block group">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzFiYpuje8oPbdUIqrhCDQi0GSTtyn79ndaQ&usqp=CAU"
+                  className="object-cover w-full aspect-square"
+                />
+                <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
+                  <h3 className="text-xl font-medium text-white">SALES</h3>
+                  <button
+                    onClick={() => router.push("/product/listing/sales")}
                     className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
                   >
                     Shop Now
@@ -162,7 +213,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         </div>
       </section>
     </main>
