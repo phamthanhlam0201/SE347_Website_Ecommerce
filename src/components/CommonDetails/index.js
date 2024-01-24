@@ -22,7 +22,7 @@ export default function CommonDetails({ item, cmtitem }) {
   const [selectedSize, setSelectedSize] = useState(null); // Add
   const [isSubmitting, setIsSubmitting] = useState(false);  
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState('black');
+  const [selectedColor, setSelectedColor] = useState('Black');
 
   const [userComment, setUserComment] = useState(""); // update
   const [isCommentFocused, setIsCommentFocused] = useState(false);
